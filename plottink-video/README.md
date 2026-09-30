@@ -15,6 +15,26 @@ música se sintetizan desde cero y ffmpeg arma el máster. No hay material de st
 H.264 High, 30 fps, BT.709, AAC 256 kbps 48 kHz, audio masterizado a **−14 LUFS** con pico real ≤ −1.5 dBTP
 (el estándar de Instagram/YouTube, para que las plataformas no lo reduzcan ni lo aplasten).
 
+## Logo animado (6 s)
+
+`dist/plottink_logo_1x1.mp4` · `dist/plottink_logo_16x9.mp4` · `dist/plottink_logo_9x16.mp4`
+
+El logo original se vectorizó: las letras y las gotas con potrace sobre la imagen escalada 4× (se conserva el filete
+transparente de las letras; sobre la franja roja se ve rojo, como en el original) y las 7 franjas midiendo sus bordes
+fila por fila. Así queda nítido a cualquier resolución y las franjas se prolongan de forma natural fuera del cuadro en 16:9 y 9:16.
+
+| Tiempo | Animación | Sonido |
+|---|---|---|
+| 0.2–1.6 s | Las 7 franjas suben desde el piso y doblan hacia la pared, de izquierda a derecha. | Un *swish* y una nota por franja (pentatónica de Re, ascendente). |
+| 1.0–1.9 s | Las letras saltan desde su base con rebote, una por una. | *Pops* burbujeantes que suben de tono. |
+| 1.6–2.3 s | La K se contrae y "lanza" la tinta: las gotas K, C, Y, M vuelan en arco, se estiran con la velocidad y aterrizan con un rebote. | Latigazo y cuatro gotas de agua al aterrizar, más un golpe grave. |
+| 2.55–3.25 s | Un brillo recorre las letras; luego el logo queda fijo con un leve empuje de cámara. | Destello y acorde Re mayor 9 que resuelve. |
+
+```bash
+python3 logo-anim/trace_logo.py   # solo si cambia el logo de origen → logo-anim/logo.json
+logo-anim/build.sh                # las 3 versiones (≈30 s)
+```
+
 ## Idea
 
 > "Esto no es solo un taller. Es donde una idea se vuelve una pieza real, con precisión milimétrica."

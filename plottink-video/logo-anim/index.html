@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><title>PlottInk — Logo</title>
+<style>html,body{margin:0;background:#ddd}canvas{display:block;max-width:100vw;max-height:100vh;margin:auto}</style></head>
+<body><canvas id="c"></canvas>
+<script src="logo.js"></script>
+<script>
+// ?w=1080&h=1080&t=2  ·  &play=1 para verla en bucle
+(async () => {
+  const q = new URLSearchParams(location.search);
+  const W = +(q.get('w') || 1080), H = +(q.get('h') || 1080);
+  init(await fetch('logo.json').then(r => r.json()), W, H);
+  window.renderFrame = draw; window.TOTAL = LOGO_DUR;
+  if (q.get('play')) { const t0 = performance.now(); const f = () => { draw(((performance.now() - t0) / 1000) % (LOGO_DUR + 1)); requestAnimationFrame(f); }; f(); }
+  else draw(+(q.get('t') || LOGO_DUR));
+  window.READY = true;
+})();
+</script>
+</body></html>
