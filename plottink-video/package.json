@@ -1,0 +1,16 @@
+{
+  "name": "plottink-film",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PlottInk — cortometraje de marca generado por código (Canvas + síntesis de audio + ffmpeg)",
+  "type": "module",
+  "scripts": {
+    "prep": "node tools/extract-glyphs.mjs && node tools/extract-colombia.mjs",
+    "render": "node render.mjs"
+  },
+  "devDependencies": {
+    "opentype.js": "^1.3.4",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
+  }
+}

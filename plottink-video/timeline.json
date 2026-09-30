@@ -1,0 +1,776 @@
+{
+  "fps": 30,
+  "bpm": 96,
+  "palette": {
+    "bg": "#0A0A0F",
+    "ink": "#F2EEE8",
+    "dim": "#8A8790",
+    "laser": "#FFB347",
+    "laserHot": "#FFF4E0",
+    "cyan": "#1CB0E3",
+    "magenta": "#E2197C",
+    "yellow": "#F6D21E",
+    "key": "#16161C",
+    "rainbow": [
+      "#E3173E",
+      "#F29A38",
+      "#F8D94A",
+      "#9CC45C",
+      "#A5D6EE",
+      "#7B9FD4",
+      "#9A7DBE"
+    ]
+  },
+  "cuts": {
+    "full": {
+      "label": "Master 94 s",
+      "musicStart": 11.5,
+      "sections": {
+        "intro": 11.5,
+        "build": 24.0,
+        "peak": 65.25,
+        "drop": 77.75,
+        "resolve": 82.75,
+        "end": 94.0
+      },
+      "scenes": [
+        [
+          "hook_laser",
+          7.0
+        ],
+        [
+          "hook_question",
+          4.5
+        ],
+        [
+          "logo",
+          5.0
+        ],
+        [
+          "positioning",
+          7.5
+        ],
+        [
+          "cut",
+          6.25
+        ],
+        [
+          "engrave",
+          5.0
+        ],
+        [
+          "materials",
+          6.25
+        ],
+        [
+          "largeformat",
+          5.0
+        ],
+        [
+          "vinyl",
+          3.75
+        ],
+        [
+          "sign",
+          5.0
+        ],
+        [
+          "souvenirs",
+          5.0
+        ],
+        [
+          "design",
+          5.0
+        ],
+        [
+          "process",
+          12.5
+        ],
+        [
+          "close_piece",
+          5.0
+        ],
+        [
+          "outro",
+          11.25
+        ]
+      ]
+    },
+    "c45": {
+      "label": "Reels 45 s",
+      "musicStart": 7.0,
+      "sections": {
+        "intro": 7.0,
+        "build": 9.5,
+        "peak": 29.5,
+        "drop": 37.0,
+        "resolve": 39.5,
+        "end": 45.0
+      },
+      "scenes": [
+        [
+          "hook_laser",
+          4.0
+        ],
+        [
+          "hook_question",
+          3.0
+        ],
+        [
+          "logo",
+          2.5
+        ],
+        [
+          "cut",
+          3.75
+        ],
+        [
+          "engrave",
+          3.75
+        ],
+        [
+          "materials",
+          3.75
+        ],
+        [
+          "largeformat",
+          2.5
+        ],
+        [
+          "sign",
+          3.75
+        ],
+        [
+          "souvenirs",
+          2.5
+        ],
+        [
+          "process",
+          7.5
+        ],
+        [
+          "close_piece",
+          2.5
+        ],
+        [
+          "outro",
+          5.5
+        ]
+      ]
+    },
+    "c30": {
+      "label": "Reels 30 s",
+      "musicStart": 5.0,
+      "sections": {
+        "intro": 5.0,
+        "build": 7.0,
+        "peak": 18.5,
+        "drop": 22.0,
+        "resolve": 24.25,
+        "end": 30.0
+      },
+      "scenes": [
+        [
+          "hook_laser",
+          2.75
+        ],
+        [
+          "hook_question",
+          2.25
+        ],
+        [
+          "logo",
+          2.0
+        ],
+        [
+          "cut",
+          2.5
+        ],
+        [
+          "engrave",
+          2.25
+        ],
+        [
+          "materials",
+          2.5
+        ],
+        [
+          "sign",
+          2.25
+        ],
+        [
+          "souvenirs",
+          2.0
+        ],
+        [
+          "trust_short",
+          3.5
+        ],
+        [
+          "close_piece",
+          2.25
+        ],
+        [
+          "outro",
+          5.75
+        ]
+      ]
+    }
+  },
+  "scenes": {
+    "hook_laser": {
+      "marks": {
+        "dot": 0.09,
+        "line": 0.24,
+        "contour": 0.42,
+        "pattern": 0.58,
+        "end": 1.0
+      },
+      "sfx": [
+        {
+          "at": "dot",
+          "type": "tick",
+          "gain": 0.35
+        },
+        {
+          "at": "line",
+          "until": "end",
+          "type": "laser",
+          "speed": [
+            [
+              0,
+              0.15
+            ],
+            [
+              0.3,
+              0.35
+            ],
+            [
+              0.55,
+              0.6
+            ],
+            [
+              1.0,
+              1.0
+            ]
+          ],
+          "gain": 0.75
+        },
+        {
+          "at": "pattern",
+          "until": "end",
+          "type": "sparks",
+          "density": [
+            0.3,
+            1.0
+          ],
+          "gain": 0.7
+        }
+      ]
+    },
+    "hook_question": {
+      "marks": {
+        "cool": 0.05,
+        "textIn": 0.18,
+        "textOut": 0.84,
+        "black": 0.92
+      },
+      "sfx": [
+        {
+          "at": 0.0,
+          "type": "freeze",
+          "gain": 0.6
+        },
+        {
+          "at": "textIn",
+          "type": "note",
+          "pitch": 81,
+          "gain": 0.28
+        }
+      ]
+    },
+    "logo": {
+      "marks": {
+        "trace": 0.04,
+        "traceEnd": 0.42,
+        "fill": 0.44,
+        "bars": 0.5,
+        "sub": 0.62
+      },
+      "sfx": [
+        {
+          "at": "trace",
+          "until": "traceEnd",
+          "type": "laser",
+          "speed": [
+            [
+              0,
+              0.8
+            ],
+            [
+              1,
+              1.0
+            ]
+          ],
+          "gain": 0.55
+        },
+        {
+          "at": "trace",
+          "until": "traceEnd",
+          "type": "sparks",
+          "density": [
+            0.25,
+            0.4
+          ],
+          "gain": 0.35
+        },
+        {
+          "at": "fill",
+          "type": "impact",
+          "gain": 0.8
+        }
+      ]
+    },
+    "positioning": {
+      "marks": {
+        "file": 0.0,
+        "t1": 0.08,
+        "materialize": 0.34,
+        "t2": 0.4,
+        "pull": 0.6,
+        "t3": 0.68
+      },
+      "sfx": [
+        {
+          "at": 0.02,
+          "type": "ui",
+          "gain": 0.25
+        },
+        {
+          "at": "materialize",
+          "type": "whoosh",
+          "dur": 0.9,
+          "gain": 0.45
+        },
+        {
+          "at": "pull",
+          "type": "clicks",
+          "dur": 1.6,
+          "count": 14,
+          "gain": 0.3
+        }
+      ]
+    },
+    "cut": {
+      "marks": {
+        "laserOn": 0.04,
+        "cutEnd": 0.54,
+        "lift": 0.58,
+        "callout": 0.62,
+        "text": 0.66
+      },
+      "sfx": [
+        {
+          "at": "laserOn",
+          "until": "cutEnd",
+          "type": "laser",
+          "speed": [
+            [
+              0,
+              0.5
+            ],
+            [
+              1,
+              0.55
+            ]
+          ],
+          "gain": 0.8
+        },
+        {
+          "at": "laserOn",
+          "until": "cutEnd",
+          "type": "sparks",
+          "density": [
+            0.35,
+            0.45
+          ],
+          "gain": 0.45
+        },
+        {
+          "at": "lift",
+          "type": "pop",
+          "material": "acrylic",
+          "gain": 0.7
+        },
+        {
+          "at": "callout",
+          "type": "ui",
+          "gain": 0.22
+        }
+      ]
+    },
+    "engrave": {
+      "marks": {
+        "raster": 0.03,
+        "rasterEnd": 0.6,
+        "sweep": 0.52,
+        "text": 0.64
+      },
+      "sfx": [
+        {
+          "at": "raster",
+          "until": "rasterEnd",
+          "type": "raster",
+          "lineRate": 14,
+          "gain": 0.7
+        },
+        {
+          "at": "sweep",
+          "type": "whoosh",
+          "dur": 1.6,
+          "gain": 0.22
+        }
+      ]
+    },
+    "materials": {
+      "marks": {
+        "s0": 0.0,
+        "s1": 0.1,
+        "s2": 0.2,
+        "s3": 0.3,
+        "s4": 0.4,
+        "s5": 0.5,
+        "pull": 0.62,
+        "text": 0.7
+      },
+      "sfx": [
+        {
+          "at": 0.02,
+          "type": "tap",
+          "material": "acrylic",
+          "gain": 0.55
+        },
+        {
+          "at": 0.12,
+          "type": "tap",
+          "material": "mdf",
+          "gain": 0.6
+        },
+        {
+          "at": 0.22,
+          "type": "tap",
+          "material": "leather",
+          "gain": 0.6
+        },
+        {
+          "at": 0.32,
+          "type": "tap",
+          "material": "glass",
+          "gain": 0.5
+        },
+        {
+          "at": 0.42,
+          "type": "tap",
+          "material": "metal",
+          "gain": 0.45
+        },
+        {
+          "at": 0.52,
+          "type": "tap",
+          "material": "wood",
+          "gain": 0.6
+        },
+        {
+          "at": "pull",
+          "type": "shimmer",
+          "dur": 1.8,
+          "gain": 0.3
+        }
+      ]
+    },
+    "largeformat": {
+      "marks": {
+        "rise": 0.05,
+        "riseEnd": 0.5,
+        "text": 0.56
+      },
+      "sfx": [
+        {
+          "at": "rise",
+          "until": "riseEnd",
+          "type": "unroll",
+          "gain": 0.5
+        },
+        {
+          "at": "riseEnd",
+          "type": "snap",
+          "gain": 0.6
+        }
+      ]
+    },
+    "vinyl": {
+      "marks": {
+        "squeegee": 0.04,
+        "squeegeeEnd": 0.36,
+        "peel": 0.38,
+        "peelEnd": 0.7,
+        "text": 0.5
+      },
+      "sfx": [
+        {
+          "at": "squeegee",
+          "until": "squeegeeEnd",
+          "type": "squeegee",
+          "gain": 0.45
+        },
+        {
+          "at": "peel",
+          "until": "peelEnd",
+          "type": "peel",
+          "gain": 0.45
+        }
+      ]
+    },
+    "sign": {
+      "marks": {
+        "on": 0.26,
+        "onEnd": 0.46,
+        "text": 0.56
+      },
+      "sfx": [
+        {
+          "at": 0.0,
+          "until": 1.0,
+          "type": "city",
+          "gain": 0.35
+        },
+        {
+          "at": "on",
+          "until": "onEnd",
+          "type": "relays",
+          "count": 7,
+          "gain": 0.6
+        },
+        {
+          "at": "on",
+          "until": 1.0,
+          "type": "hum",
+          "gain": 0.3
+        }
+      ]
+    },
+    "souvenirs": {
+      "marks": {
+        "place": 0.02,
+        "placeEnd": 0.45,
+        "names": 0.46,
+        "text": 0.6
+      },
+      "sfx": [
+        {
+          "at": "place",
+          "until": "placeEnd",
+          "type": "placements",
+          "count": 9,
+          "gain": 0.5
+        },
+        {
+          "at": "names",
+          "type": "sparkle",
+          "gain": 0.25
+        }
+      ]
+    },
+    "design": {
+      "marks": {
+        "sketch": 0.02,
+        "sketchEnd": 0.36,
+        "vector": 0.4,
+        "vectorEnd": 0.62,
+        "preview": 0.64,
+        "text": 0.5
+      },
+      "sfx": [
+        {
+          "at": "sketch",
+          "until": "sketchEnd",
+          "type": "pencil",
+          "gain": 0.55
+        },
+        {
+          "at": "vector",
+          "type": "whoosh",
+          "dur": 0.7,
+          "gain": 0.35
+        },
+        {
+          "at": "vector",
+          "until": "vectorEnd",
+          "type": "nodes",
+          "count": 10,
+          "gain": 0.28
+        },
+        {
+          "at": "preview",
+          "until": 0.95,
+          "type": "laser",
+          "speed": [
+            [
+              0,
+              0.9
+            ],
+            [
+              1,
+              1.0
+            ]
+          ],
+          "gain": 0.3
+        }
+      ]
+    },
+    "process": {
+      "marks": {
+        "s1": 0.0,
+        "s2": 0.2,
+        "s3": 0.4,
+        "s4": 0.6,
+        "trust": 0.8
+      },
+      "sfx": [
+        {
+          "at": 0.04,
+          "type": "chat",
+          "gain": 0.4
+        },
+        {
+          "at": 0.15,
+          "type": "chat",
+          "gain": 0.3
+        },
+        {
+          "at": 0.2,
+          "type": "whoosh",
+          "dur": 0.5,
+          "gain": 0.3
+        },
+        {
+          "at": 0.3,
+          "type": "stamp",
+          "gain": 0.5
+        },
+        {
+          "at": 0.4,
+          "type": "whoosh",
+          "dur": 0.5,
+          "gain": 0.3
+        },
+        {
+          "at": 0.42,
+          "until": 0.58,
+          "type": "laser",
+          "speed": [
+            [
+              0,
+              1.0
+            ],
+            [
+              1,
+              1.0
+            ]
+          ],
+          "gain": 0.45
+        },
+        {
+          "at": 0.42,
+          "until": 0.58,
+          "type": "sparks",
+          "density": [
+            0.5,
+            0.6
+          ],
+          "gain": 0.35
+        },
+        {
+          "at": 0.6,
+          "type": "whoosh",
+          "dur": 0.5,
+          "gain": 0.3
+        },
+        {
+          "at": 0.61,
+          "until": 0.68,
+          "type": "checks",
+          "count": 12,
+          "gain": 0.3
+        },
+        {
+          "at": 0.69,
+          "type": "box",
+          "gain": 0.45
+        },
+        {
+          "at": 0.71,
+          "until": 0.79,
+          "type": "routes",
+          "count": 8,
+          "gain": 0.22
+        },
+        {
+          "at": 0.8,
+          "type": "impact",
+          "gain": 0.45
+        }
+      ]
+    },
+    "trust_short": {
+      "marks": {
+        "chat": 0.02,
+        "trust": 0.4
+      },
+      "sfx": [
+        {
+          "at": 0.06,
+          "type": "chat",
+          "gain": 0.4
+        },
+        {
+          "at": "trust",
+          "type": "impact",
+          "gain": 0.4
+        }
+      ]
+    },
+    "close_piece": {
+      "marks": {
+        "text": 0.22
+      },
+      "sfx": [
+        {
+          "at": 0.0,
+          "type": "air",
+          "dur": 1.0,
+          "gain": 0.3
+        }
+      ]
+    },
+    "outro": {
+      "marks": {
+        "logo": 0.02,
+        "cta": 0.34,
+        "fade": 0.93
+      },
+      "sfx": [
+        {
+          "at": "logo",
+          "type": "impact",
+          "gain": 0.35
+        },
+        {
+          "at": "cta",
+          "type": "ui",
+          "gain": 0.2
+        }
+      ]
+    }
+  }
+}

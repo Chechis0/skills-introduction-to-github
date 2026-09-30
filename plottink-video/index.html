@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>PlottInk — Film</title>
+<link rel="stylesheet" href="fonts/local.css">
+<style>
+  html,body{margin:0;background:#000;overflow:hidden}
+  canvas{display:block;max-width:100vw;max-height:100vh;margin:auto}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script src="js/engine.js"></script>
+<script src="js/textures.js"></script>
+<script src="js/scenes-a.js"></script>
+<script src="js/scenes-b.js"></script>
+<script src="js/scenes-c.js"></script>
+<script>
+// ?w=1920&h=1080&cut=full  →  window.ready (Promise), window.renderFrame(t), window.TOTAL
+(async () => {
+  const q = new URLSearchParams(location.search);
+  const W = +(q.get('w') || 1920), H = +(q.get('h') || 1080), cut = q.get('cut') || 'full';
+  const [timeline, glyphs, colombia] = await Promise.all(['timeline.json', 'glyphs.json', 'colombia.json'].map(f => fetch(f).then(r => r.json())));
+  const faces = ["400 20px 'Instrument Serif'", "italic 400 20px 'Instrument Serif'", "200 20px 'Inter Tight'", "300 20px 'Inter Tight'", "400 20px 'Inter Tight'", "500 20px 'Inter Tight'", "600 20px 'Inter Tight'", "400 20px 'JetBrains Mono'", "500 20px 'JetBrains Mono'", "600 20px 'Fredoka'", "700 20px 'Fredoka'"];
+  await Promise.all(faces.map(f => document.fonts.load(f)));
+  initEngine({ W, H, timeline, cut, glyphs, colombia });
+  window.TOTAL = E.total;
+  window.renderFrame = renderFrame;
+  if (q.get('play')) { const t0 = performance.now(); const loop = () => { const t = ((performance.now() - t0) / 1000) % E.total; renderFrame(t); requestAnimationFrame(loop); }; loop(); }
+  else renderFrame(+(q.get('t') || 0));
+  window.READY = true;
+})();
+</script>
+</body>
+</html>
