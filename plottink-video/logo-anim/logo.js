@@ -18,14 +18,15 @@ const rgb = (c, a = 1) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
 function hash(i, s = 0) { let h = (i | 0) * 374761393 + (s | 0) * 668265263; h = (h ^ (h >>> 13)) * 1274126177; h ^= h >>> 16; return (h >>> 0) / 4294967296; }
 
 let L, W, H, ctx, K, OX, OY;
-function init(logo, w, h) {
+// opts (opcional, para reutilizar el logo dentro de otras piezas): { side, cx, cy } en px
+function init(logo, w, h, opts = {}) {
   L = logo; W = w; H = h;
   const c = document.getElementById('c'); c.width = W; c.height = H; ctx = c.getContext('2d');
   // el logo (cuadro 512 u) ocupa el 88–90 % del lado corto; franjas extendidas llenan el resto
-  const side = Math.min(W, H) * (W === H ? 0.9 : W > H ? 0.9 : 0.92);
+  const side = opts.side || Math.min(W, H) * (W === H ? 0.9 : W > H ? 0.9 : 0.92);
   K = side / 512;
-  OX = W / 2 - 256 * K + (W > H ? 0 : 0);
-  OY = H / 2 - 256 * K + (H > W ? -0.02 * H : 0);
+  OX = (opts.cx ?? W / 2) - 256 * K;
+  OY = (opts.cy ?? (H / 2 + (H > W ? -0.02 * H : 0))) - 256 * K;
   L.letterPaths = L.letters.map(l => new Path2D(l.d));
   L.dropPaths = L.drops.map(d => ({ sil: new Path2D(d.d), hl: d.hl ? new Path2D(d.hl) : null }));
   // rango visible de cada franja (en índices de fila)

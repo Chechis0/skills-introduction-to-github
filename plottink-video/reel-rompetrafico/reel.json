@@ -1,0 +1,175 @@
+{
+  "dur": 23.0,
+  "fps": 30,
+  "bpm": 120,
+  "beat0": 0.6,
+  "srcFrames": 457,
+  "wipeIn": [
+    0.0,
+    0.32,
+    0.72
+  ],
+  "clips": [
+    {
+      "t0": 0.0,
+      "t1": 4.1,
+      "src": 8.25
+    },
+    {
+      "t0": 4.1,
+      "t1": 6.6,
+      "src": 0.35
+    },
+    {
+      "t0": 6.6,
+      "t1": 10.1,
+      "src": 11.7
+    }
+  ],
+  "freeze": {
+    "t0": 10.1,
+    "t1": 11.6,
+    "src": 14.6
+  },
+  "photo": {
+    "t0": 11.6,
+    "t1": 18.75
+  },
+  "wipeOut": [
+    18.42,
+    18.75,
+    19.1
+  ],
+  "end": {
+    "t0": 18.75,
+    "speed": 1.3
+  },
+  "stickers": [
+    {
+      "t0": 0.75,
+      "t1": 3.95,
+      "text": "ASÍ NACE UN",
+      "style": "dark",
+      "size": 56,
+      "y": 1135,
+      "rot": 2
+    },
+    {
+      "t0": 1.05,
+      "t1": 3.95,
+      "text": "ROMPETRÁFICO",
+      "style": "light",
+      "size": 116,
+      "y": 1280,
+      "rot": -3
+    },
+    {
+      "t0": 4.2,
+      "t1": 6.45,
+      "text": "IMPRESIÓN GRAN FORMATO",
+      "n": "1",
+      "color": "cyan",
+      "size": 52,
+      "y": 1300,
+      "rot": -2
+    },
+    {
+      "t0": 6.7,
+      "t1": 9.95,
+      "text": "CORTE LÁSER AL CONTORNO",
+      "n": "2",
+      "color": "magenta",
+      "size": 52,
+      "y": 1300,
+      "rot": 2
+    },
+    {
+      "t0": 7.35,
+      "t1": 9.95,
+      "text": "PRECISIÓN 0.1 mm",
+      "style": "dark",
+      "size": 40,
+      "y": 1415,
+      "rot": 2
+    },
+    {
+      "t0": 10.2,
+      "t1": 11.55,
+      "text": "DE ESTO…",
+      "style": "light",
+      "size": 118,
+      "y": 330,
+      "rot": -3
+    },
+    {
+      "t0": 11.65,
+      "t1": 13.25,
+      "text": "…A ESTO.",
+      "style": "light",
+      "size": 124,
+      "y": 320,
+      "rot": 3
+    },
+    {
+      "t0": 13.3,
+      "t1": 16.4,
+      "text": "LISTO PARA EXHIBIR",
+      "n": "3",
+      "color": "yellow",
+      "size": 58,
+      "y": 1360,
+      "rot": -2
+    },
+    {
+      "t0": 16.55,
+      "t1": 18.45,
+      "text": "PERSONAJES, PRODUCTOS",
+      "style": "light",
+      "size": 58,
+      "y": 1250,
+      "rot": -2
+    },
+    {
+      "t0": 16.75,
+      "t1": 18.45,
+      "text": "Y MARCAS A TAMAÑO REAL",
+      "style": "dark",
+      "size": 58,
+      "y": 1365,
+      "rot": 1.5
+    },
+    {
+      "t0": 20.55,
+      "t1": 23.0,
+      "text": "COTIZA TU ROMPETRÁFICO",
+      "style": "dark",
+      "size": 52,
+      "y": 1250,
+      "rot": -2,
+      "out": false
+    },
+    {
+      "t0": 20.75,
+      "t1": 23.0,
+      "text": "301 630 0242",
+      "style": "light",
+      "size": 88,
+      "y": 1375,
+      "rot": 0,
+      "icon": "wa",
+      "out": false
+    },
+    {
+      "t0": 20.95,
+      "t1": 23.0,
+      "text": "@plottink.co  ·  www.plottink.co",
+      "style": "dark",
+      "size": 34,
+      "font": "sans",
+      "y": 1490,
+      "rot": 0,
+      "out": false
+    }
+  ],
+  "burst": 11.62
+}

@@ -35,6 +35,26 @@ python3 logo-anim/trace_logo.py   # solo si cambia el logo de origen → logo-an
 logo-anim/build.sh                # las 3 versiones (≈30 s)
 ```
 
+## Reel "Rompetráfico" (23 s, 9:16)
+
+`dist/plottink_reel_rompetrafico_9x16.mp4`, hecho con el video real del corte láser y la foto de la pieza terminada (`reel-rompetrafico/media/`).
+
+| Tiempo | Imagen | Texto | Sonido |
+|---|---|---|---|
+| 0–0.7 s | Barrido de las franjas arcoíris del logo que revela el láser | — | Glissando de notas + riser |
+| 0.7–4.1 s | Láser cortando junto a la cara | ASÍ NACE UN / **ROMPETRÁFICO** | Entra el beat (120 BPM) + láser |
+| 4.1–6.6 s | Láser sobre la lámina impresa | ① IMPRESIÓN GRAN FORMATO | Groove |
+| 6.6–10.1 s | Corte al contorno con las manos guiando la lámina | ② CORTE LÁSER AL CONTORNO · PRECISIÓN 0.1 mm | Groove + láser |
+| 10.1–11.6 s | Cuadro congelado como foto instantánea | DE ESTO… | Obturador, redoble y riser |
+| 11.6–18.7 s | Destello: el rompetráfico terminado de pie en el taller, paneo hacia la cara, gotas CMYK salpicando | …A ESTO. → ③ LISTO PARA EXHIBIR → PERSONAJES, PRODUCTOS Y MARCAS A TAMAÑO REAL | Drop con golpe y platillo, arpegio |
+| 18.7–23 s | Barrido arcoíris → logo animado | COTIZA TU ROMPETRÁFICO · 301 630 0242 · @plottink.co · www.plottink.co | Sonido del logo y acorde final |
+
+Los textos quedan dentro de la zona segura de Reels (entre 150 y 1 550 px de alto). El final funde a blanco, igual que el inicio, para que el reel se repita sin corte.
+
+```bash
+reel-rompetrafico/build.sh     # prepara el material, sintetiza el audio, renderiza y codifica (≈1 min)
+```
+
 ## Idea
 
 > "Esto no es solo un taller. Es donde una idea se vuelve una pieza real, con precisión milimétrica."

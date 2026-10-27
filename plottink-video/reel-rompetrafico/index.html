@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><title>PlottInk — Reel Rompetráfico</title>
+<link rel="stylesheet" href="../fonts/local.css">
+<style>html,body{margin:0;background:#111}canvas{display:block;max-width:100vw;max-height:100vh;margin:auto}</style></head>
+<body><canvas id="c"></canvas>
+<script src="../logo-anim/logo.js"></script>
+<script src="reel.js"></script>
+<script>
+// ?t=12  ·  &play=1 para verlo en bucle (sin audio)
+(async () => {
+  const q = new URLSearchParams(location.search);
+  const [reel, logo] = await Promise.all([fetch('reel.json').then(r => r.json()), fetch('../logo-anim/logo.json').then(r => r.json())]);
+  await Promise.all(["700 20px 'Fredoka'", "600 20px 'Inter Tight'"].map(f => document.fonts.load(f)));
+  await initReel(reel, logo);
+  window.TOTAL = reel.dur;
+  if (q.get('play')) { const t0 = performance.now(); const f = async () => { await renderFrame(((performance.now() - t0) / 1000) % reel.dur); requestAnimationFrame(f); }; f(); }
+  else await renderFrame(+(q.get('t') || 0));
+  window.READY = true;
+})();
+</script>
+</body></html>
