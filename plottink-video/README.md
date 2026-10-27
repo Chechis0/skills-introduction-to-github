@@ -46,7 +46,7 @@ logo-anim/build.sh                # las 3 versiones (≈30 s)
 | 4.1–6.6 s | Láser sobre la lámina impresa | ① IMPRESIÓN GRAN FORMATO | Groove |
 | 6.6–10.1 s | Corte al contorno con las manos guiando la lámina | ② CORTE LÁSER AL CONTORNO · PRECISIÓN 0.1 mm | Groove + láser |
 | 10.1–11.6 s | Cuadro congelado como foto instantánea | DE ESTO… | Obturador, redoble y riser |
-| 11.6–18.7 s | Destello: el rompetráfico terminado, recortado del taller y puesto de pie sobre el escenario de franjas del logo (en tono pastel, con sombra de contacto y paralaje); la cámara sube hacia la cara y las gotas CMYK salpican | …A ESTO. → ③ LISTO PARA EXHIBIR → PERSONAJES, PRODUCTOS Y MARCAS A TAMAÑO REAL | Drop con golpe y platillo, arpegio |
+| 11.6–18.7 s | Destello: el rompetráfico terminado, recortado del taller y puesto en el andén de una avenida de noche (hora azul): ciudad y avisos de neón desenfocados con bokeh, tráfico que cruza detrás con estelas de larga exposición y un farol cálido que lo ilumina (luz de borde, charco de luz y sombra en el piso). La cámara sube hacia la cara y las gotas CMYK salpican | …A ESTO. → ③ LISTO PARA EXHIBIR → PERSONAJES, PRODUCTOS Y MARCAS A TAMAÑO REAL | Drop con golpe y platillo, arpegio, rumor de ciudad y carros pasando |
 | 18.7–23 s | Barrido arcoíris → logo animado | COTIZA TU ROMPETRÁFICO · 301 630 0242 · @plottink.co · www.plottink.co | Sonido del logo y acorde final |
 
 Los textos quedan dentro de la zona segura de Reels (entre 150 y 1 550 px de alto). El final funde a blanco, igual que el inicio, para que el reel se repita sin corte.

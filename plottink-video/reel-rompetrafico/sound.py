@@ -15,7 +15,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(ROOT / "audio"))
 from sound import (SR, Bus, bass, bp, convolve, fade, hp, kick, lp, noise, pad_chord,  # noqa: E402
-                   piano, pluck, reverb_ir, sfx_impact, sfx_laser, sfx_sparks, sfx_whoosh, shaker, tt)
+                   piano, pluck, reverb_ir, sfx_city, sfx_impact, sfx_laser, sfx_sparks, sfx_whoosh, shaker, tt)
 
 _spec = importlib.util.spec_from_file_location("logo_sound", ROOT / "logo-anim" / "sound.py")
 LS = importlib.util.module_from_spec(_spec)
@@ -118,6 +118,10 @@ def main():
     fx.add(riser(drop_t - brk0, 11), brk0, 0.8)
     fx.add(sfx_impact(12), drop_t, 0.9)
     drums.add(crash(13), drop_t, 0.8)
+    # ── ambiente de avenida en la escena nocturna: rumor de ciudad + carros que pasan
+    fx.add(sfx_city(end_t - drop_t, 55), drop_t, 0.45)
+    for k, dt in enumerate((0.9, 2.6, 4.1, 5.7)):
+        fx.add(sfx_whoosh(1.1, 60 + k), drop_t + dt, 0.2)
     # ── láser bajo el corte (clips A y C)
     for c, g in ((R["clips"][0], 0.5), (R["clips"][2], 0.45)):
         a = max(c["t0"], 0.45)
