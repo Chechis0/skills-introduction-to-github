@@ -106,20 +106,67 @@
     ctx.restore();
     const f = 1 - clamp(lt / 0.18); if (f > 0) { ctx.fillStyle = `rgba(255,255,255,${0.9 * f})`; ctx.fillRect(0, 0, RW, RH); }
   }
+  // ───────── escenario de marca: pared y piso con las franjas del logo (pastel) ─────────
+  let STAGE, STANDEE, SHADOW;
+  const BGS = 1.3; // el fondo se pre-renderiza 30 % más grande para el paralaje
+  function buildStage() {
+    const w = Math.round(RW * BGS), h = Math.round(RH * BGS), c = document.createElement('canvas');
+    c.width = w; c.height = h; const x = c.getContext('2d');
+    x.fillStyle = '#ffffff'; x.fillRect(0, 0, w, h);
+    // franjas: el piso del logo (y = 467 u) queda a la altura de los pies del rompetráfico
+    const k = 3.3 * BGS, ox = w / 2 - 225 * k, oy = (h / 2 + (1395 - RH / 2) * BGS) - 467 * k;
+    L.stripes.forEach(st => {
+      const fy = (st.floorY - st.y0) / st.step;
+      const poly = (i0, i1, col) => {
+        x.beginPath();
+        for (let i = i0; i >= i1; i--) { const px = ox + st.L[i] * k, py = oy + (st.y0 + i * st.step) * k; i === i0 ? x.moveTo(px, py) : x.lineTo(px, py); }
+        for (let i = i1; i <= i0; i++) x.lineTo(ox + st.R[i] * k, oy + (st.y0 + i * st.step) * k);
+        x.closePath(); x.fillStyle = `rgb(${col})`; x.fill();
+      };
+      poly(st.L.length - 1, Math.floor(fy), st.floor);
+      poly(Math.ceil(fy) + 1, 0, st.color);
+    });
+    // lavado blanco (pastel) + luz detrás del personaje + piso que se desvanece hacia el frente
+    x.fillStyle = 'rgba(255,255,255,0.5)'; x.fillRect(0, 0, w, h);
+    const g = x.createRadialGradient(w / 2, h * 0.42, 0, w / 2, h * 0.42, h * 0.5);
+    g.addColorStop(0, 'rgba(255,255,255,0.85)'); g.addColorStop(0.55, 'rgba(255,255,255,0.35)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    x.fillStyle = g; x.fillRect(0, 0, w, h);
+    const f = x.createLinearGradient(0, h * 0.82, 0, h); f.addColorStop(0, 'rgba(255,255,255,0)'); f.addColorStop(1, 'rgba(255,255,255,0.6)');
+    x.fillStyle = f; x.fillRect(0, 0, w, h);
+    return c;
+  }
+  function buildShadow(img) { // silueta oscura y desenfocada para la sombra sobre la pared
+    const c = document.createElement('canvas'); c.width = img.width / 2; c.height = img.height / 2;
+    const x = c.getContext('2d'); x.filter = 'blur(14px)'; x.drawImage(img, 0, 0, c.width, c.height);
+    x.filter = 'none'; x.globalCompositeOperation = 'source-in'; x.fillStyle = 'rgba(30,25,45,1)'; x.fillRect(0, 0, c.width, c.height);
+    return c;
+  }
+
   async function drawPhoto(t) {
     const ctx = c2d, P = R.photo, lt = t - P.t0;
-    const img = await loadImg('../build/reel/photo.jpg');
-    const base = Math.max(RW / img.width, RH / img.height);
+    const img = STANDEE;
     const k = E.inOut(clamp((lt - 0.6) / 6.0));
-    const zoom = 1 + 0.12 * (1 - E.out(clamp(lt / 0.4))) + 0.38 * k;
-    const fx = lerp(0.54, 0.49, k), fy = lerp(0.5, 0.33, k);
-    const w = img.width * base * zoom, h = img.height * base * zoom;
-    let x = RW / 2 - fx * w, y = RH / 2 - fy * h;
-    x = Math.min(0, Math.max(RW - w, x)); y = Math.min(0, Math.max(RH - h, y));
-    ctx.drawImage(img, x, y, w, h);
-    // velo inferior para los textos finales
-    const v = clamp((lt - 4.7) / 0.5);
-    if (v > 0) { const g = ctx.createLinearGradient(0, RH * 0.45, 0, RH); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, `rgba(0,0,0,${0.55 * v})`); ctx.fillStyle = g; ctx.fillRect(0, 0, RW, RH); }
+    const punch = 0.1 * (1 - E.out(clamp(lt / 0.4)));
+    const zoom = 1 + punch + 0.38 * k;
+    // fondo con paralaje (se mueve menos que el personaje)
+    const bz = (1 + (zoom - 1) * 0.3) / BGS;
+    ctx.save(); ctx.translate(RW / 2, RH / 2); ctx.scale(bz, bz); ctx.translate(-STAGE.width / 2, -STAGE.height / 2 - 40 * k);
+    ctx.drawImage(STAGE, 0, 0); ctx.restore();
+    // rompetráfico: de cuerpo entero (centrado) → acercamiento a la cara
+    const s0 = 1460 / (1799 - 141);              // alto del recorte → 1460 px en pantalla
+    const s = s0 * zoom;
+    const F = [lerp(760, 700, k), lerp(970, 590, k)];   // punto de la imagen que se sigue (centro → cara)
+    const S = [540, lerp(1560 - (1799 - 970) * s0, 780, k)]; // dónde cae en pantalla
+    const x = S[0] - F[0] * s, y = S[1] - F[1] * s;
+    // sombra de contacto en el piso
+    const footY = y + 1799 * s, footX = x + 805 * s, footW = 820 * s;
+    const cg = ctx.createRadialGradient(footX, footY, 0, footX, footY, footW * 0.6);
+    cg.addColorStop(0, 'rgba(25,20,35,0.45)'); cg.addColorStop(1, 'rgba(25,20,35,0)');
+    ctx.save(); ctx.translate(footX, footY); ctx.scale(1, 0.12); ctx.translate(-footX, -footY);
+    ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(footX, footY, footW * 0.6, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    // sombra suave sobre la pared (luz desde adelante-izquierda)
+    ctx.save(); ctx.globalAlpha = 0.22; ctx.drawImage(SHADOW, x + 38 * s, y - 10 * s, img.width * s, img.height * s); ctx.restore();
+    ctx.drawImage(img, x, y, img.width * s, img.height * s);
     const f = 1 - clamp(lt / 0.22); if (f > 0) { ctx.fillStyle = `rgba(255,255,255,${f})`; ctx.fillRect(0, 0, RW, RH); }
   }
 
@@ -198,7 +245,9 @@
     init(logo, RW, RH, { side: RW * 0.9, cx: RW / 2, cy: 690 });
     c2d = document.getElementById('c').getContext('2d');
     grain = [0, 1, 2, 3].map(k => { const g = document.createElement('canvas'); g.width = g.height = 256; const x = g.getContext('2d'), id = x.createImageData(256, 256); for (let i = 0; i < 65536; i++) { const v = 128 + (hash(i, k + 9) - 0.5) * 200; id.data[i * 4] = id.data[i * 4 + 1] = id.data[i * 4 + 2] = v; id.data[i * 4 + 3] = 255; } x.putImageData(id, 0, 0); return g; });
-    await Promise.all([loadImg('../build/reel/photo.jpg'), loadImg(srcFrame(R.freeze.src))]);
+    STANDEE = await loadImg('../build/reel/standee.png');
+    STAGE = buildStage(); SHADOW = buildShadow(STANDEE);
+    await loadImg(srcFrame(R.freeze.src));
   };
   window.renderFrame = renderReel;
 })();

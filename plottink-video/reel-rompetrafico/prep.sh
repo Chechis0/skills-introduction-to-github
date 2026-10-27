@@ -10,4 +10,15 @@ rm -rf "$OUT/src"; mkdir -p "$OUT/src"
   -q:v 2 "$OUT/src/%04d.jpg"
 "$FF" -loglevel error -y -i reel-rompetrafico/media/rompetrafico-terminado.jpg \
   -vf "scale=1500:-1:flags=lanczos,unsharp=5:5:0.6,eq=contrast=1.05:saturation=1.12" -q:v 2 "$OUT/photo.jpg"
+# rompetráfico recortado (RGBA): foto procesada + máscara versionada (ver cutout.py)
+python3 - "$OUT" <<'PY'
+import sys
+from PIL import Image
+out = sys.argv[1]
+ph = Image.open(f"{out}/photo.jpg").convert("RGB")
+m = Image.open("reel-rompetrafico/media/rompetrafico-mascara.png").convert("L").resize(ph.size, Image.LANCZOS)
+ph.putalpha(m)
+ph.save(f"{out}/standee.png")
+print("standee.png", ph.size, m.getbbox())
+PY
 echo "cuadros: $(ls "$OUT/src" | wc -l)"

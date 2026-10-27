@@ -46,13 +46,16 @@ logo-anim/build.sh                # las 3 versiones (≈30 s)
 | 4.1–6.6 s | Láser sobre la lámina impresa | ① IMPRESIÓN GRAN FORMATO | Groove |
 | 6.6–10.1 s | Corte al contorno con las manos guiando la lámina | ② CORTE LÁSER AL CONTORNO · PRECISIÓN 0.1 mm | Groove + láser |
 | 10.1–11.6 s | Cuadro congelado como foto instantánea | DE ESTO… | Obturador, redoble y riser |
-| 11.6–18.7 s | Destello: el rompetráfico terminado de pie en el taller, paneo hacia la cara, gotas CMYK salpicando | …A ESTO. → ③ LISTO PARA EXHIBIR → PERSONAJES, PRODUCTOS Y MARCAS A TAMAÑO REAL | Drop con golpe y platillo, arpegio |
+| 11.6–18.7 s | Destello: el rompetráfico terminado, recortado del taller y puesto de pie sobre el escenario de franjas del logo (en tono pastel, con sombra de contacto y paralaje); la cámara sube hacia la cara y las gotas CMYK salpican | …A ESTO. → ③ LISTO PARA EXHIBIR → PERSONAJES, PRODUCTOS Y MARCAS A TAMAÑO REAL | Drop con golpe y platillo, arpegio |
 | 18.7–23 s | Barrido arcoíris → logo animado | COTIZA TU ROMPETRÁFICO · 301 630 0242 · @plottink.co · www.plottink.co | Sonido del logo y acorde final |
 
 Los textos quedan dentro de la zona segura de Reels (entre 150 y 1 550 px de alto). El final funde a blanco, igual que el inicio, para que el reel se repita sin corte.
 
+El fondo del taller se quitó con BiRefNet (`reel-rompetrafico/cutout.py`); la máscara ya está en `media/rompetrafico-mascara.png`, así que el build no necesita el modelo.
+
 ```bash
 reel-rompetrafico/build.sh     # prepara el material, sintetiza el audio, renderiza y codifica (≈1 min)
+python3 reel-rompetrafico/cutout.py   # solo si cambia la foto: vuelve a recortar el fondo
 ```
 
 ## Idea
