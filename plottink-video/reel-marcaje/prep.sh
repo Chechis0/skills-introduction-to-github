@@ -21,4 +21,5 @@ for k in hero before; do
 done
 "$FF" -loglevel error -y -i "$M/instalacion.jpg" -vf "scale=1080:-1:flags=lanczos,unsharp=5:5:0.6,eq=contrast=1.05:saturation=1.12" -q:v 2 "$OUT/photo.jpg"
 python3 reel-marcaje/road.py "$M/carretera.jpg" "$OUT"
+python3 reel-marcaje/plates.py "$OUT"
 echo "listo"

@@ -66,6 +66,10 @@ carretera real vista desde arriba (`media/carretera.jpg`, preparada con `road.py
 grano de asfalto, loop vertical sin costura y versión con desenfoque de movimiento). La carretera va despacio en el gancho
 y acelera con el barrido del plotter, como si la van arrancara.
 
+Las placas del vehículo no aparecen en ningún cuadro (`plates.py`): cada placa se marca a mano en un cuadro ancla y se
+sigue con flujo óptico + homografía. La placa lateral se borra con la pintura blanca de la puerta (relleno por convolución
+normalizada + grano), la delantera con el negro del bómper, y también se borran las placas de las fotos de prueba impresas.
+
 | Tiempo | Imagen | Texto | Sonido |
 |---|---|---|---|
 | 0–3 s | La van **sin marcar** (generada a partir del cuadro final borrando el vinilo; ver `unwrap.py`) | ¿TU VEHÍCULO / PASA DESAPERCIBIDO? · ANTES | Calle, pad apagado, hi-hat de reloj |
