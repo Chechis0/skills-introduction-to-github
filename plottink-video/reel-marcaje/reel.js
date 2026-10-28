@@ -1,6 +1,6 @@
 // Reel "Marcaje vehicular" — PlottInk. 1080×1920, cuadro a cuadro.
 // Concepto: "tu vehículo es una valla que se mueve". El material horizontal va en una franja central
-// sobre un fondo de asfalto con las líneas del carril en movimiento.
+// sobre una carretera real (foto cenital) que corre por debajo.
 // Usa el motor del logo (logo-anim/logo.js: init, draw, E, clamp, lerp, hash, L…) para el cierre.
 'use strict';
 (() => {
@@ -9,7 +9,7 @@
   const CMY = { cyan: '#14A9E2', magenta: '#E2167E', yellow: '#F7D417' };
   const RAINBOW = ['#E61441', '#FAB742', '#FEE451', '#A5C965', '#A8DBF0', '#7B9FD3', '#9977B4'];
   const BANDS = { wide: [0, 960 - 304, RW, 608], square: [0, 960 - 540, RW, 1080], full: [0, 0, RW, RH] };
-  let R, c2d, grain, ASPHALT;
+  let R, c2d, grain;
   const cache = new Map();
   const loadImg = src => {
     if (cache.has(src)) return cache.get(src);
@@ -80,31 +80,24 @@
     });
   }
 
-  // ───────── fondo: asfalto con líneas de carril en movimiento ("valla que se mueve") ─────────
-  function buildAsphalt() {
-    const c = document.createElement('canvas'); c.width = RW; c.height = RH;
-    const x = c.getContext('2d'), id = x.createImageData(RW, RH), d = id.data;
-    for (let i = 0; i < RW * RH; i++) {
-      const px = i % RW, py = (i / RW) | 0;
-      const n = hash(i, 5) * 0.55 + hash((px >> 2) + (py >> 2) * 977, 6) * 0.45;
-      const v = 30 + n * 22 + (hash(i, 7) > 0.995 ? 30 : 0);
-      d[i * 4] = v; d[i * 4 + 1] = v + 1; d[i * 4 + 2] = v + 5; d[i * 4 + 3] = 255;
-    }
-    x.putImageData(id, 0, 0);
-    const vg = x.createRadialGradient(RW / 2, RH / 2, RH * 0.2, RW / 2, RH / 2, RH * 0.75);
-    vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,0.55)');
-    x.fillStyle = vg; x.fillRect(0, 0, RW, RH);
-    return c;
-  }
+  // ───────── fondo: carretera real vista desde arriba, en movimiento ("valla que se mueve") ─────────
+  // Despacio en el gancho; acelera con el barrido del plotter y va rápida (con desenfoque de movimiento) tras el drop.
+  let ROAD, ROADB;
+  const speedAt = t => t < 3.0 ? 220 : t < 4.0 ? lerp(220, 1500, E.inOut(t - 3.0)) : 1500;
+  const scrollAt = t => { let s = 0; const n = 160, dt = t / n; for (let i = 0; i < n; i++) s += speedAt((i + 0.5) * dt) * dt; return s; };
   function drawRoad(t) {
-    const ctx = c2d;
-    ctx.drawImage(ASPHALT, 0, 0);
-    // velocidad: se acelera en el drop y en el cierre del montaje
-    const off = (t * 1100) % 240;
-    ctx.fillStyle = 'rgba(235,235,240,0.85)';
-    for (const lx of [118, RW - 118 - 16]) for (let y = -240 + off; y < RH; y += 240) { ctx.beginPath(); ctx.roundRect(lx, y, 16, 120, 4); ctx.fill(); }
-    // bordes amarillos continuos
-    ctx.fillStyle = 'rgba(245,200,40,0.85)'; ctx.fillRect(26, 0, 10, RH); ctx.fillRect(RW - 36, 0, 10, RH);
+    const ctx = c2d, H = ROAD.height, off = scrollAt(t) % H, b = clamp((speedAt(t) - 300) / 900);
+    for (const [img, a] of [[ROAD, 1], [ROADB, b]]) {
+      if (a <= 0) continue;
+      ctx.globalAlpha = a;
+      for (let y = off - H; y < RH; y += H) ctx.drawImage(img, 0, Math.round(y));
+    }
+    ctx.globalAlpha = 1;
+    // contraste para que la franja y los textos resalten
+    ctx.fillStyle = 'rgba(0,0,0,0.16)'; ctx.fillRect(0, 0, RW, RH);
+    const vg = ctx.createRadialGradient(RW / 2, RH / 2, RH * 0.25, RW / 2, RH / 2, RH * 0.72);
+    vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,0.5)');
+    ctx.fillStyle = vg; ctx.fillRect(0, 0, RW, RH);
   }
 
   // ───────── franja de video (banda) ─────────
@@ -230,7 +223,7 @@
     init(logo, RW, RH, { side: RW * 0.9, cx: RW / 2, cy: 690 });
     c2d = document.getElementById('c').getContext('2d');
     grain = [0, 1, 2, 3].map(k => { const g = document.createElement('canvas'); g.width = g.height = 256; const x = g.getContext('2d'), id = x.createImageData(256, 256); for (let i = 0; i < 65536; i++) { const v = 128 + (hash(i, k + 9) - 0.5) * 200; id.data[i * 4] = id.data[i * 4 + 1] = id.data[i * 4 + 2] = v; id.data[i * 4 + 3] = 255; } x.putImageData(id, 0, 0); return g; });
-    ASPHALT = buildAsphalt();
+    [ROAD, ROADB] = await Promise.all(['road.jpg', 'road_blur.jpg'].map(f => loadImg('../build/marcaje/' + f)));
     await Promise.all(['before.jpg', 'hero.jpg', 'photo.jpg'].map(f => loadImg('../build/marcaje/' + f)));
   };
   window.renderFrame = renderReel;

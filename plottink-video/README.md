@@ -61,8 +61,10 @@ python3 reel-rompetrafico/cutout.py   # solo si cambia la foto: vuelve a recorta
 ## Reel "Marcaje vehicular" (24 s, 9:16)
 
 `dist/plottink_reel_marcaje_9x16.mp4`, hecho con los videos reales del marcaje de la flota de REFLO y la foto de la instalación (`reel-marcaje/media/`).
-Concepto: **"tu vehículo es una valla que se mueve"**. El material horizontal va en una franja central de cine sobre un fondo
-de asfalto con las líneas del carril en movimiento.
+Concepto: **"tu vehículo es una valla que se mueve"**. El material horizontal va en una franja central de cine sobre una
+carretera real vista desde arriba (`media/carretera.jpg`, preparada con `road.py`: línea amarilla centrada, escalada con
+grano de asfalto, loop vertical sin costura y versión con desenfoque de movimiento). La carretera va despacio en el gancho
+y acelera con el barrido del plotter, como si la van arrancara.
 
 | Tiempo | Imagen | Texto | Sonido |
 |---|---|---|---|

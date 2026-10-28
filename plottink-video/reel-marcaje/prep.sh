@@ -20,4 +20,5 @@ for k in hero before; do
   "$FF" -loglevel error -y -i "$OUT/${k}_native.png" -vf "scale=1920:1080:flags=lanczos,$GRADE" -q:v 2 "$OUT/${k}.jpg"
 done
 "$FF" -loglevel error -y -i "$M/instalacion.jpg" -vf "scale=1080:-1:flags=lanczos,unsharp=5:5:0.6,eq=contrast=1.05:saturation=1.12" -q:v 2 "$OUT/photo.jpg"
+python3 reel-marcaje/road.py "$M/carretera.jpg" "$OUT"
 echo "listo"
