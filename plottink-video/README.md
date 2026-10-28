@@ -58,6 +58,26 @@ reel-rompetrafico/build.sh     # prepara el material, sintetiza el audio, render
 python3 reel-rompetrafico/cutout.py   # solo si cambia la foto: vuelve a recortar el fondo
 ```
 
+## Reel "Marcaje vehicular" (24 s, 9:16)
+
+`dist/plottink_reel_marcaje_9x16.mp4`, hecho con los videos reales del marcaje de la flota de REFLO y la foto de la instalación (`reel-marcaje/media/`).
+Concepto: **"tu vehículo es una valla que se mueve"**. El material horizontal va en una franja central de cine sobre un fondo
+de asfalto con las líneas del carril en movimiento.
+
+| Tiempo | Imagen | Texto | Sonido |
+|---|---|---|---|
+| 0–3 s | La van **sin marcar** (generada a partir del cuadro final borrando el vinilo; ver `unwrap.py`) | ¿TU VEHÍCULO / PASA DESAPERCIBIDO? · ANTES | Calle, pad apagado, hi-hat de reloj |
+| 3–4 s | Un cabezal de plotter con boquillas CMYK barre la imagen e "imprime" el marcaje | — | Motor del carro, disparo de boquillas, riser |
+| 4–6 s | El video continúa desde ese mismo cuadro | DESPUÉS · CONVIÉRTELO EN UNA / VALLA QUE SE MUEVE | Drop: golpe, platillo, groove a 120 BPM |
+| 6–8.5 s | La prueba de diseño impresa pegada en la van | ① DISEÑO A TU MEDIDA · PRUEBA IMPRESA ANTES DE INSTALAR | |
+| 8.5–11 s | Foto a pantalla completa: del bisturí recortando el vinilo a la vista general | ② INSTALACIÓN PROFESIONAL · AJUSTE A MANO, PIEZA POR PIEZA | Corte de bisturí |
+| 11–18.7 s | Montaje al ritmo: logo R en macro, puerta, frente, capó, costado | ③ LISTO PARA RODAR → UN VEHÍCULO O TODA TU FLOTA → TU MARCA EN TODA LA CIUDAD | Arpegio, pito de carro doble |
+| 18.7–24 s | Barrido arcoíris → logo animado | COTIZA EL MARCAJE DE TU VEHÍCULO · 301 630 0242 · @plottink.co · www.plottink.co | Sonido del logo y acorde final |
+
+```bash
+reel-marcaje/build.sh     # material + audio + render + codificación (≈2 min)
+```
+
 ## Idea
 
 > "Esto no es solo un taller. Es donde una idea se vuelve una pieza real, con precisión milimétrica."
